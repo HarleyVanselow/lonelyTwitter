@@ -39,6 +39,14 @@ public class LonelyTwitterActivity extends Activity {
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
+
+				Tweet tweet = new NormalTweet(text);
+				ImportantTweet importantTweet = new ImportantTweet(text);
+
+				ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
+				tweetList.add(tweet);
+				tweetList.add(importantTweet);
+
 				saveInFile(text, new Date(System.currentTimeMillis()));
 				finish();
 

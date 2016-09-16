@@ -9,7 +9,7 @@ public abstract class Mood {
     private Date date;
 
     public Mood(){
-        setDate(new Date(System.currentTimeMillis()));
+        setDate(new Date());
     }
     public Mood(Date date){
         setDate(date);
