@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by watts1 on 9/15/16.
+ * An interface for any object that can be tweeted
  */
 public interface Tweetable {
     /**

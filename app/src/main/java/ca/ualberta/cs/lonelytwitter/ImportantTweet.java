@@ -14,6 +14,10 @@ public class ImportantTweet extends Tweet{
         super(message);
     }
 
+    /**
+     *
+     * @return It's always true
+     */
     @Override
     public Boolean isImportant(){
         return Boolean.TRUE;

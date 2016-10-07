@@ -30,18 +30,6 @@ import java.util.ArrayList;
 /**
  * This class is the main view class in lonelyTwitter class.
  * It deals with user inputs, saves/loads them in/from the file FILE_NAME (file.sav)
- * <p>You can access this file from Android Device Monitor</p>
- * <code>
- * pseudo-code that is used in this class is as follows:
- * step 1 <br>
- * step 2 <br>
- * </code>
- * <ol>
- * <li>first item</li>
- * <li>second item</li>
- * <li>third item</li>
- * <p>
- * </ol>
  *
  * @author Harley
  */
@@ -57,11 +45,11 @@ public class LonelyTwitterActivity extends Activity {
 	private ListView oldTweetsList;
 	private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
 	private ArrayAdapter<Tweet> adapter;
-	
-	/*
-	Testing multi-line documentations
-	Testing.
-	 */
+
+	/**
+	 * Sets onClick listeners for save button and clear button
+	 * @param savedInstanceState The current bundle to be reloaded from
+     */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,6 +78,9 @@ public class LonelyTwitterActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Assign an array adapter for class's oldTweetsList member
+	 */
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -120,7 +111,10 @@ public class LonelyTwitterActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Write the contents of tweetlist to a file
+	 */
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,

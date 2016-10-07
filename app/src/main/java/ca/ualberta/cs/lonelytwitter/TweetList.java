@@ -18,7 +18,7 @@ public class TweetList{
     public TweetList(){};
 
     /**
-     * Add.
+     * Add a tweet to the current tweetlist.
      *
      * @param tweet the tweet
      */
