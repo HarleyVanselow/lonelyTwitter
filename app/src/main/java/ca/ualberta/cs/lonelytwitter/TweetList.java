@@ -8,8 +8,12 @@ import java.util.List;
 
 /**
  * Created by Harley on 9/29/2016.
+ * Class to contain a list of tweets and control their addition and access.
  */
 public class TweetList{
+    /**
+     * Primary list to contain all the tweets in the tweetlist
+     */
     private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 
     /**
@@ -30,19 +34,19 @@ public class TweetList{
     }
 
     /**
-     * Contains boolean.
+     * Boolean for whether the list contains a tweet
      *
-     * @param tweet the tweet
-     * @return the boolean
+     * @param tweet Check if this tweet exists in the tweet list
+     * @return True if the tweet is in the list, false if the tweet is not in the list
      */
     public boolean contains(Tweet tweet) {
         return tweets.contains(tweet);
     }
 
     /**
-     * Gets tweets.
+     * Gets all tweets in the tweetlist in chronological order
      *
-     * @return the tweets
+     * @return All tweets, chonologically ordered
      */
     public ArrayList<Tweet> getTweets() {
         Collections.sort(tweets, new Comparator<Tweet>() {
@@ -54,9 +58,9 @@ public class TweetList{
     }
 
     /**
-     * Delete.
+     * Delete a tweet
      *
-     * @param tweet the tweet
+     * @param tweet The tweet to delete
      */
     public void delete(Tweet tweet) {
         tweets.remove(tweet);
@@ -66,8 +70,8 @@ public class TweetList{
     /**
      * Gets tweet.
      *
-     * @param i the
-     * @return the tweet
+     * @param i the index of the tweet to return
+     * @return The tweet at index i
      */
     public Tweet getTweet(int i) {
         return tweets.get(i);
@@ -76,7 +80,7 @@ public class TweetList{
     /**
      * Gets count.
      *
-     * @return the count
+     * @return The number of tweets in the list
      */
     public int getCount() {
         return tweets.size();

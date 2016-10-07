@@ -7,18 +7,27 @@ import java.util.Date;
 /**
  * Created by Harley on 9/29/2016.
  */
-
 public class TweetListTest extends ActivityInstrumentationTestCase2 {
+    /**
+     * Instantiates a new Tweet list test.
+     */
     public TweetListTest() {
         super(ca.ualberta.cs.lonelytwitter.LonelyTwitterActivity.class);
     }
 
+    /**
+     * Test has tweet.
+     */
     public void testHasTweet(){
         TweetList list = new TweetList();
         Tweet tweet = new NormalTweet("test");
         list.add(tweet);
         assertTrue(list.contains(tweet));
     }
+
+    /**
+     * Test add tweet.
+     */
     public void testAddTweet(){
         TweetList list = new TweetList();
         Tweet testTweet =new NormalTweet("adding Tweet");
@@ -27,6 +36,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
     }
 
 
+    /**
+     * Test add repeat tweet.
+     */
     public void testAddRepeatTweet(){
         TweetList list = new TweetList();
         Tweet testTweet = new NormalTweet("test");
@@ -38,12 +50,20 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         }
         fail();
     }
+
+    /**
+     * Test get tweet.
+     */
     public void testGetTweet(){
         TweetList list = new TweetList();
         Tweet testTweet = new NormalTweet("test");
         list.add(testTweet);
         assertEquals(testTweet,list.getTweet(0));
     }
+
+    /**
+     * Test that get tweets returns tweets in a chronological order.
+     */
     public void testGetTweets(){
         TweetList list = new TweetList();
         Tweet first = new NormalTweet("1");
@@ -60,6 +80,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         assertEquals(third,list.getTweets().get(2));
     }
 
+    /**
+     * Test get count.
+     */
     public void testGetCount(){
         TweetList list=  new TweetList();
         Tweet testTweet = new NormalTweet("test");
@@ -71,6 +94,10 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         assertEquals(2,list.getCount());
 
     }
+
+    /**
+     * Test delete.
+     */
     public void testDelete(){
         TweetList list = new TweetList();
         Tweet tweet = new NormalTweet("deleteMe");
