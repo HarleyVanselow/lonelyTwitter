@@ -7,8 +7,10 @@ Please contact abc@abc.ca for more details or questions.
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,11 +42,13 @@ public class LonelyTwitterActivity extends Activity {
 	 * then data -> data -> file.sav
 	 * @see NormalTweet
 	 */
+	public final static String TWEET = "ca.ualberta.cs.lonelytwitter.TWEET";
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
 	private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
 	private ArrayAdapter<Tweet> adapter;
+	private Activity activity=this;
 
 	/**
 	 * Sets onClick listeners for save button and clear button
@@ -74,6 +78,14 @@ public class LonelyTwitterActivity extends Activity {
 				tweetList.clear();
 				adapter.notifyDataSetChanged();
 				deleteFile(FILENAME);
+			}
+		});
+		oldTweetsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				Intent intent = new Intent(activity,EditTweetActivity.class);
+				String tweetText = oldTweetsList.getItemAtPosition(i).toString();
+				intent.putExtra(TWEET,tweetText);
+				startActivity(intent);
 			}
 		});
 	}
@@ -130,5 +142,9 @@ public class LonelyTwitterActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public ListView getOldTweetsList() {
+		return oldTweetsList;
 	}
 }
