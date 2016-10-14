@@ -83,7 +83,8 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				Intent intent = new Intent(activity,EditTweetActivity.class);
-				String tweetText = oldTweetsList.getItemAtPosition(i).toString();
+				Gson gson = new Gson();
+				String tweetText = gson.toJson(oldTweetsList.getItemAtPosition(i));
 				intent.putExtra(TWEET,tweetText);
 				startActivity(intent);
 			}
