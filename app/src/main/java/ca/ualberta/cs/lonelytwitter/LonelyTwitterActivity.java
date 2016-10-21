@@ -2,6 +2,7 @@ package ca.ualberta.cs.lonelytwitter;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,10 +29,10 @@ public class LonelyTwitterActivity extends Activity {
     private EditText bodyText;
     private ListView oldTweetsList;
 
-    private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-    private ArrayAdapter<Tweet> adapter;
+    private ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
+    private ArrayAdapter<NormalTweet> adapter;
 
-    public ArrayAdapter<Tweet> getAdapter() {
+    public ArrayAdapter<NormalTweet> getAdapter() {
         return adapter;
     }
 
@@ -53,12 +54,12 @@ public class LonelyTwitterActivity extends Activity {
                 String text = bodyText.getText().toString();
                 Tweet latestTweet = new NormalTweet(text);
 
-                tweets.add(latestTweet);
+                tweets.add((NormalTweet) latestTweet);
                 adapter.notifyDataSetChanged();
 
                 // TODO: Replace with Elasticsearch
-                saveInFile();
-
+                ElasticsearchTweetController.AddTweetsTask addTweetsTask = new ElasticsearchTweetController.AddTweetsTask();
+                addTweetsTask.execute((NormalTweet)latestTweet);
                 setResult(RESULT_OK);
             }
         });
@@ -70,10 +71,16 @@ public class LonelyTwitterActivity extends Activity {
 
         // Get latest tweets
         // TODO: Replace with Elasticsearch
-        loadFromFile();
+        ElasticsearchTweetController.GetTweetsTask  getTweetsTask= new ElasticsearchTweetController.GetTweetsTask();
+        try{
+            getTweetsTask.execute("");
+            tweets = getTweetsTask.get();
+        }catch(Exception e){
+            Log.i("Error","The request for tweets failed in inStart");
+        }
 
         // Binds tweet list with view, so when our array updates, the view updates with it
-        adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweets);
+        adapter = new ArrayAdapter<NormalTweet>(this, R.layout.list_item, tweets);
         oldTweetsList.setAdapter(adapter);
     }
 
@@ -90,7 +97,7 @@ public class LonelyTwitterActivity extends Activity {
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            tweets = new ArrayList<Tweet>();
+            tweets = new ArrayList<NormalTweet>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
